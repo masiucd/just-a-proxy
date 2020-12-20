@@ -36,12 +36,12 @@ func main() {
 
 		if input == p.A {
 			counter++
-			fmt.Println("correct")
+			fmt.Println("correct \n")
 		} else {
-			fmt.Println("wrong")
+			fmt.Println("wrong \n")
 		}
 	}
-	fmt.Printf("you got %d out of %d possible", counter, len(problems))
+	fmt.Printf("you got %d out of %d possible \n", counter, len(problems))
 }
 
 func printLines(lines [][]string) []MathQuizStruct {

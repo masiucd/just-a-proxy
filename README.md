@@ -8,6 +8,17 @@
 
 ## About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Gophers
 
-## Projects <a name = "projects"></a>
+## Projects <a name = "projects"></a> 📚
+
+Smaller Go programs where you can keep girding and to practice to write go programs.
+
+#### Math Game <a name = "math-game"></a> ➕➖ƛ
+
+What you will learn:
+
+- Read from a file
+- read inputs from the user
+- working with loops
+- working with struts
