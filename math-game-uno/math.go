@@ -14,10 +14,12 @@ type MathQuizStruct struct {
 	A string
 }
 
+type Counter int
+
 // Game Math game
 func Game(file string) string {
-	
-	lines,err := readFile(file)
+
+	lines, err := readFile(file)
 
 	if err != nil {
 		log.Fatal("could not parse from readFile function")
@@ -25,22 +27,13 @@ func Game(file string) string {
 
 	problems := printLines(lines)
 
-	counter := 0
+	var counter Counter = 0
 
-	for i, p := range problems {
-		fmt.Printf("#%d %s = \n", i, p.Q)
-		var input string
-		fmt.Scanf("%s", &input)
+	runGame(problems, &counter)
 
-		if input == p.A {
-			counter++
-			fmt.Println("correct \n")
-		} else {
-			fmt.Println("wrong \n")
-		}
-	}
- r:= 	fmt.Sprintf("you got %d out of %d possible \n", counter, len(problems))
- return r
+	r := fmt.Sprintf("you got %d out of %d possible \n", counter, len(problems))
+	return r
+
 }
 
 func printLines(lines [][]string) []MathQuizStruct {
@@ -56,20 +49,30 @@ func printLines(lines [][]string) []MathQuizStruct {
 	return res
 }
 
-func runGame() {
+func runGame(problems []MathQuizStruct, counter *Counter) {
+	for i, p := range problems {
+		fmt.Printf("#%d %s = \n", i, p.Q)
+		var input string
+		fmt.Scanf("%s", &input)
 
+		if input == p.A {
+			*counter++
+			fmt.Printf("correct \n")
+		} else {
+			fmt.Printf("wrong \n")
+		}
+	}
 }
 
-
-func readFile(file string) ([][]string,error) {
-	csvFile,err := os.Open(file)
+func readFile(file string) ([][]string, error) {
+	csvFile, err := os.Open(file)
 
 	if err != nil {
 		log.Fatalln("could not read file")
 	}
 	defer csvFile.Close()
 
-	r,err := csv.NewReader(csvFile).ReadAll()
+	r, err := csv.NewReader(csvFile).ReadAll()
 
-	return r,err
+	return r, err
 }
