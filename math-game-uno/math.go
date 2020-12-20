@@ -16,15 +16,12 @@ type MathQuizStruct struct {
 
 // Game Math game
 func Game(file string) string {
-	csvFile, err := os.Open(file)
+	
+	lines,err := readFile(file)
 
 	if err != nil {
-		log.Fatalf("could not read csv file")
+		log.Fatal("could not parse from readFile function")
 	}
-
-	defer csvFile.Close()
-
-	lines, err := csv.NewReader(csvFile).ReadAll()
 
 	problems := printLines(lines)
 
@@ -61,4 +58,18 @@ func printLines(lines [][]string) []MathQuizStruct {
 
 func runGame() {
 
+}
+
+
+func readFile(file string) ([][]string,error) {
+	csvFile,err := os.Open(file)
+
+	if err != nil {
+		log.Fatalln("could not read file")
+	}
+	defer csvFile.Close()
+
+	r,err := csv.NewReader(csvFile).ReadAll()
+
+	return r,err
 }
