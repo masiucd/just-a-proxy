@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
-	mathgameuno "github.com/masiuciszek/Gophers/math-game-uno"
+	mathgamedues "github.com/masiuciszek/Gophers/math-game-dues"
 )
 
 
 func main(){
-	game:=mathgameuno.Game("problems.csv")
-	fmt.Println(game)
+	x := mathgamedues.Game("problems.csv")
+	fmt.Println(x)
 }
