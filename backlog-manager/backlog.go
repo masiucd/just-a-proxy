@@ -6,13 +6,24 @@ import (
 	"net/http"
 	"text/template"
 )
+func start(htmlFile string) func(http.ResponseWriter, *http.Request) {
+	// fmt.Fprintf(wr, "Start!")
 
-func start(wr http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(wr, "Start!")
+	return func(wr http.ResponseWriter, r *http.Request) {
+		t,err := template.ParseFiles(htmlFile)
+
+		if err != nil {
+			http.Error(wr,err.Error(),http.StatusBadRequest)
+			log.Print("Template parsing error", err)
+		}
+
+		err = t.Execute(wr,nil)
+	}
 }
 
-func handleRoute(htmlFile string) func(http.ResponseWriter, *http.Request) {
 
+
+func backlogList(htmlFile string) func(http.ResponseWriter, *http.Request) {
 	return func(wr http.ResponseWriter, r *http.Request) {
 		t, err := template.ParseFiles(htmlFile)
 
@@ -25,21 +36,11 @@ func handleRoute(htmlFile string) func(http.ResponseWriter, *http.Request) {
 	}
 }
 
-// func backlog(wr http.ResponseWriter, r *http.Request) {
-// 	t, err := template.ParseFiles("backlog-list.html")
-
-// 	if err != nil {
-// 		http.Error(wr, err.Error(), http.StatusBadRequest)
-// 		log.Print("Template parsing error: ", err)
-// 	}
-
-// 	err = t.Execute(wr, nil)
-// }
 
 // Handlers func
-func Handlers(htmlFile string) {
-	http.HandleFunc("/", start)
-	http.HandleFunc("/backlog-list", handleRoute(htmlFile))
+func Handlers(htmlList map[string]string) {
+	http.HandleFunc("/", start(htmlList["start"]))
+	http.HandleFunc("/backlog-list", backlogList(htmlList["backlog-list"]))
 
 	fmt.Println("Server is running on port :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
