@@ -1,7 +1,7 @@
 package main
 
 import (
-	jsonplaceholder "github.com/masiuciszek/Gophers/json-place-holder"
+	backlogmanager "github.com/masiuciszek/Gophers/backlog-manager"
 )
 
 func main() {
@@ -24,6 +24,6 @@ func main() {
 	// in this case Log.fatal is a like a backup wrapper, os if something goes wrong handle the error
 	// log.Fatal(http.ListenAndServe(":9000", nil))
 
-	jsonplaceholder.App()
+	backlogmanager.Handlers("./public/backlog-list.html")
 
 }
