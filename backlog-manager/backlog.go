@@ -22,6 +22,7 @@ func start(htmlFile string) func(http.ResponseWriter, *http.Request) {
 	}
 }
 
+// PageVariables struct
 type PageVariables struct {
 	Title    string
 	TodoList []Todo
