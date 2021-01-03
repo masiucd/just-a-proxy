@@ -24,8 +24,9 @@ func main() {
 	// in this case Log.fatal is a like a backup wrapper, os if something goes wrong handle the error
 	// log.Fatal(http.ListenAndServe(":9000", nil))
 	// htmlList := []string{"./public/backlog-list.html", "/add-todo" }
+	
+
 	htmlList := make(map[string]string)
-		
 	htmlList["start"]	= "./public/index.html"
 	htmlList["backlog-list"]	= "./public/backlog-list.html"
 	htmlList["add-todo"]	= "./public/add-todo.html"

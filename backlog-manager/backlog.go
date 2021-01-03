@@ -39,6 +39,15 @@ func backlogList(htmlFile string) func(http.ResponseWriter, *http.Request) {
 
 // Handlers func
 func Handlers(htmlList map[string]string) {
+
+	xs,err:= ReadFile("todos.json")
+
+	if err != nil {
+		log.Fatal("could not read file from main.go",err)
+	}
+	
+	fmt.Println(xs)
+
 	http.HandleFunc("/", start(htmlList["start"]))
 	http.HandleFunc("/backlog-list", backlogList(htmlList["backlog-list"]))
 

@@ -3,7 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>backlog-list</title>
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      *::before,
+      *::after,
+      * {
+        box-sizing: inherit;
+      }
+      html {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      }
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        
+      }
+      h1 {
+        text-align: center;
+        padding: 1rem;
+      }
+      form{
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 2rem auto;
+      }
+
+      form label{
+        
+        font-size: 10px;
+        padding: 1em;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      form input,textarea{
+        font-size: 20px;
+        padding: .5em;
+        border-radius: 4px;
+        box-shadow: 2px 2px 2px 2px #ccc;
+        width: 24rem;
+        outline: 0;
+        transition: all 300ms ease-in-out;
+      }
+      form label span{
+        font-size: 2em;
+        display: inline-block;
+        margin-right: auto;
+        padding: .5em 0;
+      }
+      form textarea{
+        margin: 1rem auto;
+      }
+
+      form button{
+        padding: 1rem .5rem;
+        font-size: 1.2em;
+        cursor: pointer;
+        box-shadow: 1px 1px 2px 2px #ccc;
+        border-radius: 4px;
+        background-color: cadetblue;
+        color: #fefefe;
+        transition: background-color 300ms ease-in-out;
+
+      }
+      form button:hover{
+        box-shadow: 2px 2px 2px 2px #ccc;
+        background-color: #fefefe;
+        color: cadetblue;
+
+      }
+      
+    </style>
   </head>
   <body>
     <header>
@@ -19,17 +100,34 @@
       </nav>
     </header>
 
-    <h1>To do list with go</h1>
-    <link rel="stylesheet" href="./style.css" />
+    
+    <main>
+      <h1>To do list with go</h1>
 
-    <form action="/add-todo" method="post">
-      <label for="title"><span>title</span></label>
-      <input type="text" placeholder="title" name="title" id="title" />
+      <form action="/add-todo" method="post">
+        <label for="title"><span>title</span>
+          <input type="text" placeholder="title" name="title" id="title" />
+        </label>
 
-      <label for="text"></label>
-      <textarea name="text" id="text" cols="30" rows="10"></textarea>
+        
+        <textarea name="text" id="text" cols="30" rows="10"></textarea>
 
-      <button type="submit">add new todo</button>
-    </form>
+        <button type="submit">add new todo</button>
+      </form>
+      <hr>
+      <ul class="list">
+        <h2>Your todos</h2>
+          {{if not .Todos}}
+            <h3>No Todos</h3>
+          {{else}}
+            {{range .Todos}}
+              <li>
+                {{.Title}}
+                {{.Content}}
+              </li>
+            {{end}}
+          {{end}}
+      </div>
+    </main>
   </body>
 </html>
