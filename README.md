@@ -7,6 +7,7 @@
   - [Math Game](#math-game)
   - [Math Game Part 2](#math-game-part-2)
   - [Get request input generator](#get-req-input-gen)
+  - [Backlog list](#backlog-list)
 
 ## About <a name = "about"></a>
 
@@ -56,3 +57,7 @@ tools,
 - `http` library
 - Get request
 - `json` library
+
+#### Backlog list <a name ="backlog-list"></a>
+
+Backlog List with go, where can read/write to a json file and print the tasks to a HTML file. We can add new tasks, from the HTML(read to json file).

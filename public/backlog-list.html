@@ -117,13 +117,13 @@
       <hr>
       <ul class="list">
         <h2>Your todos</h2>
-          {{if not .Todos}}
+          {{if not .TodoList}}
             <h3>No Todos</h3>
           {{else}}
-            {{range .Todos}}
+            {{range .TodoList}}
               <li>
-                {{.Title}}
-                {{.Content}}
+                {{.Text}}
+                {{.About}}
               </li>
             {{end}}
           {{end}}

@@ -3,13 +3,14 @@ package backlogmanager
 import (
 	"encoding/json"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 )
 
 // Todo type
 type Todo struct {
-	ID        int    `json:"id"`
+	ID        string    `json:"id"`
 	Text      string `json:"text"`
 	About     string `json:"about"`
 	Completed bool   `json:"completed"`
@@ -35,4 +36,18 @@ func ReadFile(fileName string) ([]Todo, error) {
 		}
 	}
 	return todos, err
+}
+
+
+// WriteFile func
+func WriteFile(todos []Todo)  {
+
+	f,err := json.MarshalIndent(todos,"","")
+
+	if err != nil {
+		log.Fatal("failed to read to todos.json")
+	}
+
+	 ioutil.WriteFile("todos.json",f,0644)
+
 }
