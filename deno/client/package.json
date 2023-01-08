@@ -19,7 +19,9 @@
     "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
     "solid-js": "^1.6.6",
+    "tailwind-merge": "^1.8.1",
     "zod": "^3.20.2"
   }
 }
