@@ -1,18 +1,40 @@
 import {Application, Router} from "https://deno.land/x/oak@v11.1.0/mod.ts"
+import {config} from "https://deno.land/x/dotenv@v3.2.0/mod.ts"
+// import {getQuery} from "https://deno.land/x/oak@v11.1.0/helpers.ts"
 
 const router = new Router()
 const PORT = Deno.env.get("PORT") || 8000
+
+console.log(config())
 
 router
   .get("/", ctx => {
     ctx.response.body = `<h1> Hello World </h1>`
   })
-  .get("/users", ctx => {
+  // .get("/users", ctx => {
+  //   ctx.response.type = "application/json"
+  //   ctx.response.body = JSON.stringify([
+  //     {name: "John", age: 20},
+  //     {name: "Jane", age: 21},
+  //   ])
+  .get("/users", async ctx => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/users")
+    const data = await res.json()
     ctx.response.type = "application/json"
-    ctx.response.body = JSON.stringify([
-      {name: "John", age: 20},
-      {name: "Jane", age: 21},
-    ])
+    ctx.response.body = JSON.stringify(data)
+  })
+  .get("/users/:id", async ctx => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/users/${ctx.params.id}`
+    )
+    const data = await res.json()
+    // getQuery(ctx, {mergeParams: true})
+    console.log("ctx.params", ctx.params.name)
+    ctx.response.type = "application/json"
+    ctx.response.body = JSON.stringify({data: data})
+  })
+  .get("/city/:name", async ctx => {
+    // TODO: Add a query param to the url
   })
 
 const app = new Application()
