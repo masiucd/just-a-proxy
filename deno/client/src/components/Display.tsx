@@ -1,4 +1,5 @@
 import {Component} from "solid-js"
+
 import {WeatherType} from "../lib/types"
 import {formatDate} from "../lib/utils"
 
@@ -6,8 +7,11 @@ type Props = {
   weather: WeatherType
 }
 
-const Display: Component<Props> = ({weather}) => {
-  const {location, current} = weather
+const Display: Component<Props> = props => {
+  const {
+    weather: {location, current},
+    // eslint-disable-next-line solid/reactivity
+  } = props
   return (
     <div class="max-w-[20em] bg-white p-1 shadow rounded">
       <div class="flex justify-between mb-2 border-b-2 border-b-blue-600">

@@ -1,4 +1,5 @@
 import {Accessor, Component} from "solid-js"
+
 import {Weather, WeatherType} from "../lib/types"
 
 type Props = {
@@ -6,17 +7,17 @@ type Props = {
   setSearch: (value: string) => void
   search: Accessor<string>
 }
-const Form: Component<Props> = ({setWeather, search, setSearch}) => {
+const Form: Component<Props> = props => {
   return (
     <form
       class="flex w-full items-end p-2"
       onSubmit={async e => {
         e.preventDefault()
         const response = await fetch(
-          `http://api.weatherapi.com/v1/current.json?key=0c883d3faadf4bc0b1d100828230801&q=${search()}&aqi=no`
+          `http://api.weatherapi.com/v1/current.json?key=0c883d3faadf4bc0b1d100828230801&q=${props.search()}&aqi=no`
         )
         const data = await response.json()
-        setWeather(Weather.parse(data))
+        props.setWeather(Weather.parse(data))
       }}
     >
       <div class="flex-1">
@@ -27,10 +28,10 @@ const Form: Component<Props> = ({setWeather, search, setSearch}) => {
           id="city"
           class="border border-slate-900 w-full min-h-[3rem] rounded-tl-md shadow outline-none pl-2"
           type="text"
-          value={search()}
+          value={props.search()}
           onInput={e => {
             const value = e.currentTarget.value.toLowerCase()
-            setSearch(value)
+            props.setSearch(value)
           }}
         />
       </div>

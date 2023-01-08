@@ -1,6 +1,6 @@
 import Display from "./Display"
 
-let location = {
+const location = {
   name: "Warszawa",
   region: "",
   country: "Poland",
@@ -11,7 +11,7 @@ let location = {
   localtime: "2023-01-08 12:43",
 }
 
-let current = {
+const current = {
   last_updated_epoch: 1673177400,
   last_updated: "2023-01-08 12:30",
   temp_c: 3,
