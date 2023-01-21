@@ -1,8 +1,7 @@
 import {Application, Router} from "https://deno.land/x/oak@v11.1.0/mod.ts"
 import {config} from "https://deno.land/x/dotenv@v3.2.0/mod.ts"
 import {getQuery} from "https://deno.land/x/oak@v11.1.0/helpers.ts"
-
-// import {getQuery} from "https://deno.land/x/oak@v11.1.0/helpers.ts"
+import {oakCors} from "https://deno.land/x/cors@v1.2.2/mod.ts"
 
 const router = new Router()
 const PORT = Deno.env.get("PORT") || 8000
@@ -37,6 +36,7 @@ router.get("/api/:city", async ctx => {
 
 const app = new Application()
 
+app.use(oakCors()) // Enable CORS for All Routes
 app.use(router.routes())
 app.use(router.allowedMethods())
 
