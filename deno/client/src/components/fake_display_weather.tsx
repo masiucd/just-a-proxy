@@ -1,4 +1,4 @@
-import Display from "./Display"
+import Display from "./display"
 
 const location = {
   name: "Warszawa",

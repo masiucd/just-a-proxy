@@ -13,7 +13,7 @@ const Display: Component<Props> = props => {
     // eslint-disable-next-line solid/reactivity
   } = props
   return (
-    <div class="max-w-[20em] bg-white p-1 shadow rounded">
+    <div class="bg-white p-1 shadow rounded">
       <div class="flex justify-between mb-2 border-b-2 border-b-blue-600">
         <div>
           <p class="text-2xl">{location.country}</p>

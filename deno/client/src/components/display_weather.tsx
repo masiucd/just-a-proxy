@@ -1,7 +1,7 @@
 import {Component} from "solid-js"
 
 import {WeatherType} from "../lib/types"
-import Display from "./Display"
+import Display from "./display"
 
 type Props = {
   weather: WeatherType
