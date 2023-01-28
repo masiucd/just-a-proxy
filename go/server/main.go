@@ -10,12 +10,18 @@ import (
   "github.com/go-chi/chi/v5"
 )
 
-// UserResponse is the response from the API
-type UserResponse struct {
+// Post is the response from the API
+type Post struct {
   UserID int    `json:"userId"`
   ID     int    `json:"id"`
   Title  string `json:"title"`
   Body   string `json:"body"`
+}
+
+// Me is the response from the API
+type Me struct {
+  Name string `json:"name"`
+  Age  int    `json:"age"`
 }
 
 func main() {
@@ -23,6 +29,7 @@ func main() {
   r := chi.NewRouter()
   r.Use(middleware.Logger)
   r.Get("/users", getUsers)
+  r.Get("/me", getMe)
 
   http.ListenAndServe(":8080", r)
 
@@ -44,14 +51,22 @@ func getUsers(w http.ResponseWriter, r *http.Request) {
     log.Fatalln(err)
   }
 
-  var userResponse []UserResponse
-  if err := json.Unmarshal(body, &userResponse); err != nil {
+  var post []Post
+  if err := json.Unmarshal(body, &post); err != nil {
     log.Println(err)
   }
 
-  // send userResponse as json
+  // send Post as json
   w.Header().Set("Content-Type", "application/json")
   w.WriteHeader(http.StatusOK)
-  json.NewEncoder(w).Encode(userResponse)
+  json.NewEncoder(w).Encode(post)
 
+}
+
+func getMe(w http.ResponseWriter, r *http.Request) {
+  me := Me{Name: "Ibra", Age: 42}
+
+  w.Header().Set("Content-Type", "application/json")
+  w.WriteHeader(http.StatusOK)
+  json.NewEncoder(w).Encode(me)
 }
